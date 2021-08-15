@@ -2,6 +2,7 @@ import Header from '../components/header'
 import ExtLink from '../components/ext-link'
 import Features from '../components/features'
 import sharedStyles from '../styles/shared.module.css'
+import Link from 'next/link'
 
 export default function Index() {
   return (
@@ -14,7 +15,7 @@ export default function Index() {
           width="250"
           alt="Vercel + Notion"
         />
-        <h1>My Notion Blog</h1>
+        <h1>Erdogan Notion Blog</h1>
         <h2>
           Blazing Fast Notion Blog with Next.js'{' '}
           <ExtLink
@@ -44,22 +45,18 @@ export default function Index() {
             </ExtLink>{' '}
             which allow us to achieve all of the benefits listed above including
             blazing fast speeds, great local editing experience, and always
-            being available!
+            being available!{' '}
+            {/* <ExtLink href="/blog">
+              Lets Jump to the my notion blog
+            </ExtLink>{' '} */}
+            <Link href="/blog">
+              <a>
+                Lets Jump to the blog
+              </a>
+            </Link>
           </p>
 
-          <p>
-            Get started by creating a new page in Notion and clicking the deploy
-            button below. After you supply your token and the blog index id (the
-            page's id in Notion) we will automatically create the table for you!
-            See{' '}
-            <ExtLink href="https://github.com/ijjk/notion-blog#getting-blog-index-and-token">
-              here in the readme
-            </ExtLink>{' '}
-            for finding the new page's id. To get your token from Notion, login
-            and look for a cookie under www.notion.so with the name `token_v2`.
-            After finding your token and your blog's page id you should be good
-            to go!
-          </p>
+
         </div>
       </div>
     </>
