@@ -13,9 +13,8 @@ import getBlogIndex from '../../lib/notion/getBlogIndex'
 import getNotionUsers from '../../lib/notion/getNotionUsers'
 import { getBlogLink, getDateStr } from '../../lib/blog-helpers'
 import Gist from 'super-react-gist'
-import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { coldarkDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import gradientLight from '../../lib/codeTheme/hljs/gradient-light';
 
 // Get the data for each blog post
 export async function getStaticProps({ params: { slug }, preview }) {
@@ -397,23 +396,8 @@ const RenderPost = ({ post, redirect, preview }) => {
               if (properties.title) {
                 const content = properties.title[0][0]
                 const language = properties.language[0][0]
-                // if (language === 'LiveScript') {
-                //   // this requires the DOM for now
-                //   toRender.push(
-                //     <ReactJSXParser
-                //       key={id}
-                //       jsx={content}
-                //       components={components}
-                //       componentsOnly={false}
-                //       renderInpost={false}
-                //       allowUnknownElements={true}
-                //       blacklistedTags={['script', 'style']}
-                //     />
-                //   )
-                // }
-
                 toRender.push(
-                  <SyntaxHighlighter language={`${language.lowercase}`} style={coldarkDark}>
+                  <SyntaxHighlighter language={`${language.toLowerCase()}`} style={gradientLight}>
                     {content}
                   </SyntaxHighlighter>
                 )
@@ -429,7 +413,6 @@ const RenderPost = ({ post, redirect, preview }) => {
               break
             }
             case 'gist': {
-              console.log('gist came', properties.source[0][0])
               if (properties.source) {
                 toRender.push(
                   <div>
