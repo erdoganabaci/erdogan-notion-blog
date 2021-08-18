@@ -4,7 +4,11 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <span>Created by Erdogan</span>
+        <span>Forked from
+          <ExtLink href="https://github.com/ijjk/notion-blog">{' '}
+            ijjk/notion-blog
+          </ExtLink>
+        </span>
         <br></br>
         <span>Made with NextJs ! </span>
 
