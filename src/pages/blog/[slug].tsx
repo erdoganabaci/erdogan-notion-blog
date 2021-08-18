@@ -15,6 +15,7 @@ import { getBlogLink, getDateStr } from '../../lib/blog-helpers'
 import Gist from 'super-react-gist'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import gradientLight from '../../lib/codeTheme/hljs/gradient-light';
+import DisqusComments from '../../components/disqus/disqusComments';
 
 // Get the data for each blog post
 export async function getStaticProps({ params: { slug }, preview }) {
@@ -481,6 +482,12 @@ const RenderPost = ({ post, redirect, preview }) => {
           }
           return toRender
         })}
+        <br></br>
+        <DisqusComments
+          id={post.id}
+          title={post.Page}
+          postSlug={post.Slug}
+        />
       </div>
     </>
   )
