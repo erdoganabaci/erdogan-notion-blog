@@ -48,6 +48,22 @@ export async function getStaticProps({ preview }) {
 }
 
 const Index = ({ posts = [], preview }) => {
+  const getPostTags = (tagsArr) => {
+    const tags = tagsArr.split(',')
+    const tagRender = []
+    if (tags.includes('Travel')) {
+      tagRender.push(
+        <div className={blogStyles.tagItem} style={{ "backgroundColor": "#31cb31" }}>Travel</div>
+      )
+    }
+    if (tags.includes('React')) {
+      tagRender.push(
+        <div className={blogStyles.tagItem} style={{ "backgroundColor": "#4DA3BC" }}>React</div>
+      )
+    }
+    return tagRender
+  };
+
   return (
     <>
       <Header titlePre="Blog" />
@@ -85,6 +101,12 @@ const Index = ({ posts = [], preview }) => {
               )}
               {post.Date && (
                 <div className="posted">Posted: {getDateStr(post.Date)}</div>
+              )}
+              {post.Tags && (
+                <div className={blogStyles.tagItemWrapper} >
+                  <div>Tags:</div>
+                  {getPostTags(post.Tags)}
+                </div>
               )}
               <p>
                 {(!post.preview || post.preview.length === 0) &&
