@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useState } from 'react'
 import Header from '../../components/header'
 
 import blogStyles from '../../styles/blog.module.css'
@@ -48,6 +49,8 @@ export async function getStaticProps({ preview }) {
 }
 
 const Index = ({ posts = [], preview }) => {
+  const [search, setSearch] = useState('');
+
   const getPostTags = (tagsArr) => {
     const tags = tagsArr.split(',')
     const tagRender = []
@@ -80,10 +83,23 @@ const Index = ({ posts = [], preview }) => {
       )}
       <div className={`${sharedStyles.layout} ${blogStyles.blogIndex}`}>
         <h1>Erdogan Notion Blog</h1>
+        <div className={`${blogStyles.divInput}`}>
+          <input placeholder="Search..." onChange={(e) => setSearch(e.target.value)} ></input>
+        </div>
         {posts.length === 0 && (
           <p className={blogStyles.noPosts}>There are no posts yet</p>
         )}
-        {posts.map((post) => {
+        {posts.filter((val) => {
+          if (search === "") {
+            return posts
+          } else if (val.Page.toLowerCase().includes(search.toLowerCase())) {
+            return posts
+          } else if (val.Tags.toLowerCase().includes(search.toLowerCase())) {
+            return posts
+          }
+        }
+
+        ).map((post) => {
           return (
             <div className={blogStyles.postPreview} key={post.Slug}>
               <h3>
